@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petitpanier-deployment
+  labels:
+    app: petitpanier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petitpanier
+  template:
+    metadata:
+      labels:
+        app: petitpanier
+    spec:
+      containers:
+      - name: app
+        image: petitpanier:2.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
