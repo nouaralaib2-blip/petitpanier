@@ -2,98 +2,290 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>PetitPanier - Vente de fruits frais</title>
+    <title>PetitPanier - Produits, Tarifs & Commande</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #f4f7f4;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+        /* Barre de navigation (Rubriques) */
+        nav {
+            background-color: #1b5e20;
+            padding: 15px 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            text-decoration: underline;
+            color: #a5d6a7;
         }
         header {
-            background: #2e7d32;
+            background-color: #2e7d32;
             color: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            text-align: center;
+            padding: 40px 20px;
         }
-        .container {
+        section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        h2 {
+            color: #2e7d32;
+            border-bottom: 2px solid #e8f5e9;
+            padding-bottom: 10px;
+        }
+        /* Grille des produits */
+        .grid-produits {
             display: flex;
-            justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            margin: 20px 0;
+            justify-content: center;
+            margin-top: 20px;
         }
-        .card {
-            background: white;
+        .carte {
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 20px;
-            width: 220px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 240px;
+            text-align: center;
+            background: #fafafa;
+        }
+        .prix {
+            font-size: 1.3em;
+            color: #2e7d32;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        /* Tableau des tarifs */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2e7d32;
+            color: white;
+        }
+        /* Formulaire de commande */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #2e7d32;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1em;
             font-weight: bold;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #1b5e20;
+        }
+        #recap-panier {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
         footer {
-            margin-top: 40px;
-            font-size: 0.9em;
+            text-align: center;
+            padding: 20px;
             color: #666;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <!-- MENU DE NAVIGATION (LES RUBRIQUES) -->
+    <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="#produits">Nos Produits</a>
+        <a href="#tarifs">Grille des Tarifs</a>
+        <a href="#commander">Commander en ligne</a>
+    </nav>
+
+    <!-- RUBRIQUE 1 : ACCUEIL -->
+    <header id="accueil">
         <h1>PetitPanier</h1>
         <p>Des fruits frais locaux et de saison livrés directement chez vous.</p>
+        <img src="image" alt="Panier de fruits frais" style="max-width: 300px; border-radius: 10px; margin-top: 15px;">
     </header>
 
-    <!-- Illustration de la page -->
-    <img src="image" alt="Panier de fruits frais" style="max-width: 350px; border-radius: 8px; margin-bottom: 20px;">
-
-    <h2>Nos Paniers Disponibles</h2>
-    
-    <div class="container">
-        <div class="card">
-            <h3>Panier Découverte</h3>
-            <p>Assortiment de 3kg de fruits de saison.</p>
-            <p><strong>15,00 €</strong></p>
-            <button onclick="ajouterPanier('Panier Découverte')">Ajouter au panier</button>
+    <!-- RUBRIQUE 2 : PRODUITS -->
+    <section id="produits">
+        <h2>Nos Produits Frais</h2>
+        <div class="grid-produits">
+            <div class="carte">
+                <h3>Panier Découverte</h3>
+                <p>Pommes, poires, bananes et oranges de saison (3 kg).</p>
+                <div class="prix">15,00 €</div>
+                <button onclick="ajouterAuPanier('Panier Découverte', 15)">+ Ajouter au panier</button>
+            </div>
+            <div class="carte">
+                <h3>Panier Familial</h3>
+                <p>Assortiment complet pour toute la famille (6 kg).</p>
+                <div class="prix">28,00 €</div>
+                <button onclick="ajouterAuPanier('Panier Familial', 28)">+ Ajouter au panier</button>
+            </div>
+            <div class="carte">
+                <h3>Panier Vitalité</h3>
+                <p>Fruits rouges, agrumes et kiwis riches en vitamines (4 kg).</p>
+                <div class="prix">22,00 €</div>
+                <button onclick="ajouterAuPanier('Panier Vitalité', 22)">+ Ajouter au panier</button>
+            </div>
         </div>
+    </section>
+
+    <!-- RUBRIQUE 3 : TARIFS -->
+    <section id="tarifs">
+        <h2>Grille des Tarifs & Abonnements</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Formule</th>
+                    <th>Poids estimé</th>
+                    <th>Livraison</th>
+                    <th>Tarif TTC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Panier Découverte (1 à 2 pers.)</td>
+                    <td>3 kg</td>
+                    <td>Gratuite en point relais</td>
+                    <td><strong>15,00 €</strong></td>
+                </tr>
+                <tr>
+                    <td>Panier Vitalité (Sport & Énergie)</td>
+                    <td>4 kg</td>
+                    <td>Gratuite à domicile</td>
+                    <td><strong>22,00 €</strong></td>
+                </tr>
+                <tr>
+                    <td>Panier Familial (4 à 5 pers.)</td>
+                    <td>6 kg</td>
+                    <td>Gratuite à domicile</td>
+                    <td><strong>28,00 €</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- RUBRIQUE 4 : COMMANDE EN LIGNE -->
+    <section id="commander">
+        <h2>Passer une Commande en Ligne</h2>
         
-        <div class="card">
-            <h3>Panier Familial</h3>
-            <p>Assortiment de 6kg de fruits variés.</p>
-            <p><strong>28,00 €</strong></p>
-            <button onclick="ajouterPanier('Panier Familial')">Ajouter au panier</button>
+        <div id="recap-panier">
+            <strong>Votre panier actuel :</strong> <span id="liste-articles">Aucun article sélectionné</span><br>
+            <strong>Total à payer :</strong> <span id="total-prix">0,00</span> €
+            <button type="button" onclick="viderPanier()" style="background:#c62828; padding:5px 10px; font-size:0.8em; margin-left:15px;">Vider</button>
         </div>
-    </div>
 
-    <p id="confirmation" style="color: green; font-weight: bold; margin-top: 20px;"></p>
+        <form onsubmit="validerCommande(event)">
+            <div class="form-group">
+                <label for="nom">Nom complet :</label>
+                <input type="text" id="nom" placeholder="Ex: Nouara Laïb" required>
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse de livraison :</label>
+                <input type="text" id="adresse" placeholder="Ex: 12 rue des Lilas, Paris" required>
+            </div>
+            <div class="form-group">
+                <label for="livraison">Créneau de livraison souhaité :</label>
+                <select id="livraison">
+                    <option value="Matin (9h - 12h)">Matin (9h - 12h)</option>
+                    <option value="Après-midi (14h - 18h)">Après-midi (14h - 18h)</option>
+                    <option value="Soir (18h - 20h)">Soir (18h - 20h)</option>
+                </select>
+            </div>
+            <button type="submit">Confirmer la commande</button>
+        </form>
+
+        <p id="message-confirmation" style="color: #2e7d32; font-weight: bold; margin-top: 15px;"></p>
+    </section>
 
     <footer>
-        <p><strong>Version 2.0</strong> — Déployé par le <strong>Groupe 3</strong> (Laetitia, Nouara et Manel)</p>
+        <p><strong>Version 2.0</strong> — Déployée par le <strong>Groupe 3</strong> (Laetitia, Nouara et Manel)</p>
     </footer>
 
+    <!-- LOGIQUE JAVASCRIPT POUR LE PANIER ET LA COMMANDE -->
     <script>
-        function ajouterPanier(nomProduit) {
-            const message = document.getElementById('confirmation');
-            message.textContent = "✔ " + nomProduit + " a bien été ajouté à votre panier !";
-            setTimeout(() => {
-                message.textContent = "";
-            }, 4000);
+        let panier = [];
+        let total = 0;
+
+        function ajouterAuPanier(nom, prix) {
+            panier.push(nom);
+            total += prix;
+            mettreAJourAffichage();
+        }
+
+        function viderPanier() {
+            panier = [];
+            total = 0;
+            mettreAJourAffichage();
+        }
+
+        function mettreAJourAffichage() {
+            const listeEl = document.getElementById('liste-articles');
+            const totalEl = document.getElementById('total-prix');
+            
+            if (panier.length === 0) {
+                listeEl.textContent = "Aucun article sélectionné";
+            } else {
+                listeEl.textContent = panier.join(", ");
+            }
+            totalEl.textContent = total.toFixed(2).replace('.', ',');
+        }
+
+        function validerCommande(event) {
+            event.preventDefault();
+            if (panier.length === 0) {
+                alert("Veuillez ajouter au moins un panier dans la rubrique 'Nos Produits' avant de commander.");
+                return;
+            }
+            const nom = document.getElementById('nom').value;
+            const creneau = document.getElementById('livraison').value;
+            const msg = document.getElementById('message-confirmation');
+            
+            msg.textContent = `Merci ${nom} ! Votre commande (${total.toFixed(2)} €) est validée pour une livraison : ${creneau}.`;
+            viderPanier();
+            event.target.reset();
         }
     </script>
 
